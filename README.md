@@ -17,7 +17,7 @@ func main() {
     g := h2g.New(&h2g.Config{
         Handler: map[string]h2g.Func{
             //server name : GrpcClient
-            "live.Debug": func() interface{} {
+            "hello.Debug": func() interface{} {
                 //New Grpc Connect
                 conn, err := grpc.Dial(model.GrpcAddr, grpc.WithInsecure())
                 if err != nil {
@@ -37,3 +37,27 @@ func main() {
     m.Run(iris.Addr("127.0.0.1:80"))
 }
 ```
+
+```protobuf
+//Protobuf file
+syntax = "proto3";
+
+message Request{
+  string msg = 1;
+}
+
+message Response{
+    string msg = 1;
+}
+
+service Hello{
+  rpc SayHello(Request) returns (Response);
+}
+```
+
+Now we can use Postman or Curl or the other to test grpc server.
+> Post: http://127.0.0.1/grpc/hello.Debug/SayHello
+> 
+> with request data: {"msg": "hello"}
+> 
+> xpected output: {"msg": "xxx"}.
