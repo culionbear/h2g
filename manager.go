@@ -15,7 +15,7 @@ type Manager struct {
 	method		string
 }
 
-func New(c Config) *Manager {
+func New(c *Config) *Manager {
 	m := &Manager{
 		handler: make(map[string]*module),
 		service: c.Service,
