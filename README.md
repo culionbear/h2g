@@ -1,1 +1,3 @@
-# h2g
+# H2G
+
+contracted but not simple
